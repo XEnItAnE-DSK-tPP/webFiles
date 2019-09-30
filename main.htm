@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="this is an example of meta description.">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1">
+        <title>Ham proj</title>
+        <style>
+            body
+            {
+                background-color:black;
+            }
+            .nav-main
+            {
+                background-color:#252525;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 60px;
+                display: flex;
+                flex-wrap: wrap;
+                z-index: 1000;
+            }
+            .btn-toggle-nav
+            {
+                width: 60px;
+                height: 100%;
+                background-color:rgb(28, 148, 179);
+            }
+            .btn-toggle-nav
+            {
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+            }
+            .btn-toggle-nav div
+            {
+                border-radius: 4px;
+                margin-left: auto;
+                margin-right: auto;
+                top: 25px;
+                position: relative;
+                width: 48px;
+                height:6px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .btn-toggle-nav div:before
+            {
+                border-radius: 4px;
+                content: '';
+                position: absolute;
+                z-index: 1;
+                top: -12px;
+                width: 48px;
+                height: 6px;
+                background: inherit;
+            }
+            .btn-toggle-nav div:after
+            {
+                border-radius: 4px;
+                content: '';
+                position: absolute;
+                z-index: 1;
+                top: 12px;
+                width: 48px;
+                height: 6px;
+                background: inherit;
+            }
+            .nav-main h1
+            {
+                display: block;
+                margin-right: auto;
+                margin-left: auto;
+                font-family: cursive;
+                color: rgb(28, 148, 179);
+            }
+            .nav-sidebar
+            {
+                margin-left: 0px;
+                position: fixed;
+                left: 0;
+                top:60px;
+                bottom: 0;
+                width: 50px;
+                padding: 0 5px;
+                height: calc(100vh - 60px);
+                background-color:rgb(28, 148, 179);
+                z-index: 1000;
+                transition: all 0.3s ease-in-out;
+                -webkit-overflow-scrolling: touch;
+                overflow-y: scroll;
+            }
+            .nav-sidebar ul
+            {
+                padding-top: 15px;
+                visibility: hidden;
+                
+            }
+            .nav-sidebar ul li
+            {   
+                line-height: 30px;
+            }
+            .nav-sidebar span, .nav-sidebar ul li a
+            {
+                display: block;
+                line-height: 30px;
+                padding:0px 5px;
+                text-decoration: none;
+                text-transform: capitalize;
+                color:#252525;
+                font-family: cursive;
+                font-size: 20px;
+                white-space:nowrap;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+            }
+            .nav-sidebar span
+            {
+                color: rgb(28, 148, 179);
+                width:50px;
+                line-height: 0px;
+                transform:translate(-5px);
+                background: rgb(255, 255, 255);
+                position: fixed;
+                transition: all 0.3s ease-in-out;
+            }
+            .main
+            {
+                position: absolute;
+                display: block;
+                left:60px;
+                top:60px;
+                height: calc(100vh - 60px);
+                width: calc(100vw - 60px);
+                border: none;
+                transition: 0.3s ease-in-out;
+            }
+            ::-webkit-scrollbar
+            {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="nav-main">
+            <div class="btn-toggle-nav" onclick="toggleNav()"><div></div></div>
+            <h1 calss="titleOfCh" id="titlebar"></h1>
+        </nav>
+        <aside class="nav-sidebar">
+            <span><h2>Content</h2></span>
+            <br><br>
+            <ul>    
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 001\.htm" target ="pageBlock" onclick="changeTitle(0)" id="0">Chapter 1</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 002\.htm" target ="pageBlock" onclick="changeTitle(1)" id="1">Chapter 2</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 003\.htm" target ="pageBlock" onclick="changeTitle(2)" id="2">Chapter 3</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 004\.htm" target ="pageBlock" onclick="changeTitle(3)" id="3">Chapter 4</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 005\.htm" target ="pageBlock" onclick="changeTitle(4)" id="4">Chapter 5</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 006\.htm" target ="pageBlock" onclick="changeTitle(5)" id="5">Chapter 6</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 007\.htm" target ="pageBlock" onclick="changeTitle(6)" id="6">Chapter 7</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 008\.htm" target ="pageBlock" onclick="changeTitle(7)" id="7">Chapter 8</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 009\.htm" target ="pageBlock" onclick="changeTitle(8)" id="8">Chapter 9</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 010\.htm" target ="pageBlock" onclick="changeTitle(9)" id="9">Chapter 10</a></li>
+                <li><a href="D:\manga\5 Centimeters Per Second\Vol.01 Chapter 011\.htm" target ="pageBlock" onclick="changeTitle(10)" id="10">Chapter 11</a></li>
+            </ul>
+        </aside>
+    <iframe class="main" name="pageBlock"  id="container"></iframe>
+    </body>
+    <script>
+        let toggleNavStatus = false;
+        let toggleNav=function()
+        {
+            let con=document.querySelector(".main");
+            let getSidebar=document.querySelector(".nav-sidebar");
+            let getSidebarList = document.querySelector(".nav-sidebar ul")
+            let getsidebarTitle=document.querySelector(".nav-sidebar span")
+            let getsidebarlnks=document.querySelectorAll(".nav-sidebar a");
+
+            if(toggleNavStatus==false)
+            {
+                con.style.left="200px";
+                con.style.width="calc(100% - 200px)";
+                getSidebarList.style.visibility="visible";
+                getSidebar.style.width = "190px";
+                getsidebarTitle.style.opacity="1";
+                getsidebarTitle.style.width="190px";
+                let arraylength=getsidebarlnks.length;
+                for(let i=0;i<arraylength;i++)
+                {
+                    getsidebarlnks[i].style.opacity="1";
+                }
+                toggleNavStatus=true;
+            }
+            else
+            {
+                con.style.left="60px";
+                con.style.width="calc(100% - 60px)";
+                getSidebar.style.width="50px";
+                getsidebarTitle.style.opacity="0";
+                getsidebarTitle.style.width="50px";
+                let arraylength=getsidebarlnks.length;
+                for(let i=0;i<arraylength;i++)
+                {
+                    getsidebarlnks[i].style.opacity="0";
+                }
+                getSidebarList.style.visibility="hidden";
+                toggleNavStatus=false;
+            }
+        }
+        let changeTitle=function(number)
+        {
+            let title=document.getElementById("titlebar");
+            var x=document.getElementById(number).innerHTML;
+            title.innerHTML=x;
+        }
+    </script>
+</html>
